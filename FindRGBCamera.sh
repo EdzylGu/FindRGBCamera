@@ -16,17 +16,16 @@ function record()
 {
     video_name=`date +"%Y_%m_%d_%H:%M:%S"`
     echo ${video_name}
-    if [ $(ls -l | grep "/*.mp4" | wc -l) -gt 4 ]
+    if [ $(ls -l | grep "/*.mp4" | wc -l) -gt 59 ]
      then
-         echo "file > 4"
+         echo "file > 59"
          rm -r $(ls -rt | grep "/*.mp4" | head -n1)
      fi
 
-    do=`ffmpeg -t 30000 -s 640x480 -i ${camera} ${video_name}.mp4`
+    do=`ffmpeg -t 300 -s 640x480 -i ${camera} -vf hflip -b:v 700K ${video_name}.mp4`
 }
 
 
 while true; do
     record
-    sleep 30000
 done
