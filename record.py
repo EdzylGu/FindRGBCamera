@@ -4,7 +4,7 @@ import time
 camera_info = os.popen("v4l2-ctl --list-devices |tr -s '\n\t' '_'").read()
 camera_info_split = camera_info.split('_')
 find_camera = "RGB"
- 
+
 for idx, val in enumerate(camera_info_split):
 	if val.find(find_camera) != -1:
 		camera = camera_info_split[idx+1]
